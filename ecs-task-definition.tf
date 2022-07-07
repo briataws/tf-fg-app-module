@@ -7,14 +7,14 @@ data "template_file" "app" {
   template = file("${path.module}/tasks/app_task_definition.json")
 
   vars = {
-    env_vars       = "${jsonencode(var.env_vars)}"
-    app_name       = "${var.app_name}"
-    memory         = "${var.memory}"
-    image          = "${var.image_url}"
-    region         = "${var.region}"
-    port           = "${var.app_port}"
-    awslogs-group  = "${var.environment}_fargate_ecs"
-    user           = "${var.user}"
+    env_vars      = "${jsonencode(var.env_vars)}"
+    app_name      = "${var.app_name}"
+    memory        = "${var.memory}"
+    image         = "${var.image_url}"
+    region        = "${var.region}"
+    port          = "${var.app_port}"
+    awslogs-group = "${var.environment}_fargate_ecs"
+    user          = "${var.user}"
 
 
   }

@@ -5,7 +5,7 @@ resource "aws_service_discovery_private_dns_namespace" "terraform" {
 }
 
 resource "aws_service_discovery_service" "terraform" {
-  name = "jenkins"
+  name = var.app_name
 
   dns_config {
     namespace_id = aws_service_discovery_private_dns_namespace.terraform.id

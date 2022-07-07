@@ -23,10 +23,10 @@ resource "aws_security_group" "ecs_service" {
   }
 
   ingress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    self = true
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    self      = true
   }
 
   tags = {
@@ -63,7 +63,7 @@ resource "aws_ecs_service" "app" {
   depends_on = [aws_alb_listener.selected]
 
   service_registries {
-    registry_arn = aws_service_discovery_service.terraform.arn
-    container_name = var.container_name
+    registry_arn   = aws_service_discovery_service.terraform.arn
+    container_name = var.app_name
   }
 }

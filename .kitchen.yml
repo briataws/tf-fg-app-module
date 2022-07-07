@@ -1,0 +1,30 @@
+---
+driver:
+  name: terraform
+  variable_files:
+    - testing.tfvars
+
+provisioner:
+  name: terraform
+
+platforms:
+  - name: aws
+
+verifier:
+  name: terraform
+  groups:
+    - name: default
+      hostnames: public_dns
+      username: ubuntu
+
+suites:
+  - name: default
+    verifier:
+      systems:
+        - name: tf-fg-app-module
+          backend: local
+          reporter:
+            - cli
+            - junit:test/integration/default/junit/junit.xml
+      patterns:
+        - test/integration/default/controls/*_spec.rb

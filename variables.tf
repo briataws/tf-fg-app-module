@@ -99,6 +99,6 @@ variable "container_path" {
 }
 
 variable "health_check_path" {
-  default = "/"
+  default     = "/"
   description = "health check path for the ALB"
 }
