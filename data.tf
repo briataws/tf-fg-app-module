@@ -69,3 +69,8 @@ data "aws_route53_zone" "selected" {
 
 data "aws_availability_zones" "available" {}
 
+
+data "aws_service_discovery_dns_namespace" "terraform" {
+  name = var.aws_service_discovery_namespace
+  type = "DNS_PRIVATE"
+}

@@ -94,11 +94,13 @@ variable "user" {
   description = "ECS Docker User"
 }
 
-variable "container_path" {
-  description = "Container Mount Point"
-}
 
 variable "health_check_path" {
   default     = "/"
   description = "health check path for the ALB"
+}
+
+variable "aws_service_discovery_namespace" {
+  default = "terraform.local"
+  description = "Name of the AWS Service Discovery Namespace"
 }

@@ -11,3 +11,4 @@
 **/.kitchen/*
 test/integration/default/junit/junit.xml
 .terraform.lock.hcl
+test/integration/default/files/terraform.json
