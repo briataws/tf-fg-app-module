@@ -30,6 +30,6 @@ bundle exec kitchen converge
 
 ```
 terraform output --json > test/integration/default/files/terraform.json
-inspec exec test/integration/default
+bundle exec kitchen verify
 ```
 
