@@ -50,7 +50,7 @@ data "aws_subnet" "alb" {
 
 # ECS execution role Lookup
 data "aws_iam_role" "ecs_execution_role" {
-  name = "${var.environment}_ecs_task_execution_role"
+  name = "ecs_task_execution_role"
 }
 
 # ECS cluster Lookup
