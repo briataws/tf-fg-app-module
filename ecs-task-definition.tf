@@ -21,7 +21,7 @@ data "template_file" "app" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = ${var.environment}-${var.app_name}
+  family                   = "${var.environment}-${var.app_name}"
   container_definitions    = data.template_file.app.rendered
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
