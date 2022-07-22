@@ -5,7 +5,7 @@
 # Security Group for ECS
 resource "aws_security_group" "ecs_service" {
   vpc_id      = data.aws_vpc.selected.id
-  name        = "${var.app_name}-ecs-service-sg"
+  name        = "${var.environment}-${var.app_name}-ecs-service-sg"
   description = "Allow egress from container"
 
   egress {
@@ -30,7 +30,7 @@ resource "aws_security_group" "ecs_service" {
   }
 
   tags = {
-    Name        = "${var.app_name}-ecs-service-sg"
+    Name        = "${var.environment}-${var.app_name}-ecs-service-sg"
     Environment = "${var.environment}"
   }
 }
@@ -42,7 +42,7 @@ data "aws_ecs_task_definition" "app" {
 }
 
 resource "aws_ecs_service" "app" {
-  name            = var.app_name
+  name            = "${var.environment}-${var.app_name}"
   task_definition = "${aws_ecs_task_definition.app.family}:${max("${aws_ecs_task_definition.app.revision}", "${data.aws_ecs_task_definition.app.revision}")}"
   desired_count   = var.min
   launch_type     = "FARGATE"
@@ -55,7 +55,7 @@ resource "aws_ecs_service" "app" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.selected.arn
-    container_name   = var.app_name
+    container_name   = "${var.environment}-${var.app_name}"
     container_port   = var.app_port
   }
 
@@ -64,6 +64,6 @@ resource "aws_ecs_service" "app" {
 
   service_registries {
     registry_arn   = aws_service_discovery_service.terraform.arn
-    container_name = var.app_name
+    container_name = "${var.environment}-${var.app_name}"
   }
 }

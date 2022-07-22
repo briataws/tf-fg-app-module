@@ -12,7 +12,7 @@ resource "aws_appautoscaling_target" "target" {
 }
 
 resource "aws_appautoscaling_policy" "up" {
-  name               = "${var.app_name}_scale_up"
+  name               = "${var.environment}-${var.app_name}_scale_up"
   service_namespace  = "ecs"
   resource_id        = "service/${data.aws_ecs_cluster.fargate.cluster_name}/${aws_ecs_service.app.name}"
   scalable_dimension = "ecs:service:DesiredCount"
@@ -32,7 +32,7 @@ resource "aws_appautoscaling_policy" "up" {
 }
 
 resource "aws_appautoscaling_policy" "down" {
-  name               = "${var.app_name}_scale_down"
+  name               = "${var.environment}-${var.app_name}_scale_down"
   service_namespace  = "ecs"
   resource_id        = "service/${data.aws_ecs_cluster.fargate.cluster_name}/${aws_ecs_service.app.name}"
   scalable_dimension = "ecs:service:DesiredCount"
@@ -53,7 +53,7 @@ resource "aws_appautoscaling_policy" "down" {
 
 /* metric used for auto scale */
 resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
-  alarm_name          = "${var.app_name}_cpu_utilization_high"
+  alarm_name          = "${var.environment}-${var.app_name}_cpu_utilization_high"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "10"
   metric_name         = "CPUUtilization"

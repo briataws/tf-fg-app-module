@@ -8,7 +8,7 @@ data "template_file" "app" {
 
   vars = {
     env_vars      = "${jsonencode(var.env_vars)}"
-    app_name      = "${var.app_name}"
+    app_name      = "${var.environment}-${var.app_name}"
     memory        = "${var.memory}"
     image         = "${var.image_url}"
     region        = "${var.region}"
@@ -21,7 +21,7 @@ data "template_file" "app" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = var.app_name
+  family                   = ${var.environment}-${var.app_name}
   container_definitions    = data.template_file.app.rendered
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"

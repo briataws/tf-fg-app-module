@@ -10,7 +10,7 @@ resource "random_id" "target_group_sufix" {
 }
 
 resource "aws_alb_target_group" "selected" {
-  name        = "${var.app_name}-alb-${random_id.target_group_sufix.hex}"
+  name        = "${var.environment}-${var.app_name}-alb-${random_id.target_group_sufix.hex}"
   port        = var.app_port
   protocol    = "HTTP"
   vpc_id      = data.aws_vpc.selected.id
@@ -31,7 +31,7 @@ resource "aws_alb_target_group" "selected" {
 
 # Security group for ALB
 resource "aws_security_group" "inbound_sg" {
-  name        = "${var.app_name}-inbound-sg"
+  name        = "${var.environment}-${var.app_name}-inbound-sg"
   description = "Allow HTTP from Anywhere into ALB"
   vpc_id      = data.aws_vpc.selected.id
 
@@ -57,18 +57,18 @@ resource "aws_security_group" "inbound_sg" {
   }
 
   tags = {
-    Name = "${var.app_name}-inbound-sg"
+    Name = "${var.environment}-${var.app_name}-inbound-sg"
   }
 }
 
 resource "aws_alb" "selected" {
-  name            = "${var.app_name}-alb"
+  name            = "${var.environment}-${var.app_name}-alb"
   internal        = var.alb_internal
   subnets         = flatten([data.aws_subnet.alb.*.id])
   security_groups = ["${aws_security_group.inbound_sg.id}"]
 
   tags = {
-    Name        = "${var.app_name}-alb"
+    Name        = "${var.environment}-${var.app_name}-alb"
     Environment = "${var.environment}"
   }
 }

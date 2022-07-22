@@ -1,5 +1,5 @@
 resource "aws_service_discovery_service" "terraform" {
-  name = var.app_name
+  name = "${var.environment}-${var.app_name}"
 
   dns_config {
     namespace_id = data.aws_service_discovery_dns_namespace.terraform.id
