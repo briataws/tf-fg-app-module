@@ -104,3 +104,8 @@ variable "aws_service_discovery_namespace" {
   default     = "terraform.local"
   description = "Name of the AWS Service Discovery Namespace"
 }
+
+variable "drop_invalid_header_fields" {
+  default     = true
+  description = "drop invalid header fields"
+}

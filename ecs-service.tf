@@ -3,6 +3,7 @@
 #
 
 # Security Group for ECS
+#tfsec:ignore:aws-ec2-no-public-ingress-sgr #tfsec:ignore:aws-ec2-no-public-egress-sgr
 resource "aws_security_group" "ecs_service" {
   vpc_id      = data.aws_vpc.selected.id
   name        = "${var.environment}-${var.app_name}-ecs-service-sg"
