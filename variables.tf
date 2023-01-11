@@ -101,6 +101,6 @@ variable "health_check_path" {
 }
 
 variable "aws_service_discovery_namespace" {
-  default = "terraform.local"
+  default     = "terraform.local"
   description = "Name of the AWS Service Discovery Namespace"
 }
