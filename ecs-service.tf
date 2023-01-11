@@ -20,7 +20,7 @@ resource "aws_security_group" "ecs_service" {
     from_port       = var.app_port
     to_port         = var.app_port
     protocol        = "tcp"
-    security_groups = ["${aws_security_group.inbound_sg.id}"]
+    security_groups = [aws_security_group.inbound_sg.id]
   }
 
   ingress {
@@ -32,7 +32,7 @@ resource "aws_security_group" "ecs_service" {
 
   tags = {
     Name        = "${var.environment}-${var.app_name}-ecs-service-sg"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 
@@ -50,8 +50,8 @@ resource "aws_ecs_service" "app" {
   cluster         = data.aws_ecs_cluster.fargate.id
 
   network_configuration {
-    security_groups = ["${aws_security_group.ecs_service.id}"]
-    subnets         = flatten([data.aws_subnet.private.*.id])
+    security_groups = [aws_security_group.ecs_service.id]
+    subnets         = flatten([data.aws_subnet.private[*].id])
   }
 
   load_balancer {

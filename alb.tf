@@ -65,13 +65,13 @@ resource "aws_security_group" "inbound_sg" {
 resource "aws_alb" "selected" {
   name            = "${var.environment}-${var.app_name}-alb"
   internal        = var.alb_internal
-  subnets         = flatten([data.aws_subnet.alb.*.id])
-  security_groups = ["${aws_security_group.inbound_sg.id}"]
   drop_invalid_header_fields = var.drop_invalid_header_fields
+  subnets         = flatten([data.aws_subnet.alb[*].id])
+  security_groups = [aws_security_group.inbound_sg.id]
 
   tags = {
     Name        = "${var.environment}-${var.app_name}-alb"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 #tfsec:ignore:aws-elb-http-not-used

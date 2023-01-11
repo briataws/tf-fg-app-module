@@ -11,5 +11,5 @@ resource "aws_route53_record" "selected" {
   name    = "${var.app_name}.${var.route53_zone_name}"
   type    = "CNAME"
   ttl     = "300"
-  records = ["${aws_alb.selected.dns_name}"]
+  records = [aws_alb.selected.dns_name]
 }

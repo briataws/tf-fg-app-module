@@ -10,7 +10,7 @@
 data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["${var.vpc_name}"]
+    values = [var.vpc_name]
   }
 }
 
@@ -22,7 +22,7 @@ data "aws_subnets" "private" {
   }
 
   tags = {
-    Network = "${var.instance_network_tag}"
+    Network = var.instance_network_tag
   }
 }
 
@@ -39,7 +39,7 @@ data "aws_subnets" "alb" {
   }
 
   tags = {
-    Network = "${var.alb_network_tag}"
+    Network = var.alb_network_tag
   }
 }
 
@@ -67,7 +67,7 @@ data "aws_route53_zone" "selected" {
   private_zone = var.route53_private_zone
 }
 
-data "aws_availability_zones" "available" {}
+#data "aws_availability_zones" "available" {}
 
 
 data "aws_service_discovery_dns_namespace" "terraform" {
