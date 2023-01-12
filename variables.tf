@@ -130,4 +130,5 @@ variable "aws_service_discovery_namespace" {
 variable "drop_invalid_header_fields" {
   default     = true
   description = "drop invalid header fields"
+  type        = string
 }
