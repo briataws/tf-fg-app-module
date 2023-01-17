@@ -63,10 +63,10 @@ resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
   threshold           = "85"
 
   dimensions = {
-    ClusterName = "${data.aws_ecs_cluster.fargate.cluster_name}"
-    ServiceName = "${aws_ecs_service.app.name}"
+    ClusterName = data.aws_ecs_cluster.fargate.cluster_name
+    ServiceName = aws_ecs_service.app.name
   }
 
-  alarm_actions = ["${aws_appautoscaling_policy.up.arn}"]
-  ok_actions    = ["${aws_appautoscaling_policy.down.arn}"]
+  alarm_actions = [aws_appautoscaling_policy.up.arn]
+  ok_actions    = [aws_appautoscaling_policy.down.arn]
 }
