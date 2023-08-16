@@ -14,10 +14,6 @@ memory               = "4096"
 health_check_path    = "/"
 
 
-route53_zone_name = "sandbox-testing-private.com"
-
-route53_private_zone = true
-
 env_vars = [{
   "name"  = "WHO"
   "value" = "Brian Carpio"

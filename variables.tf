@@ -21,16 +21,6 @@ variable "vpc_name" {
   type        = string
 }
 
-variable "instance_network_tag" {
-  description = "instance_network_tag"
-  type        = string
-}
-
-variable "alb_network_tag" {
-  description = "alb_network_tag"
-  type        = string
-}
-
 variable "alb_internal" {
   default     = true
   description = "Internal ALB true | false"
@@ -96,16 +86,6 @@ variable "memory" {
 variable "env_vars" {
   type        = list(map(string))
   description = "ENV VARS for Docker"
-}
-
-variable "route53_zone_name" {
-  description = "Route 53 Zone Name"
-  type        = string
-}
-
-variable "route53_private_zone" {
-  description = "Route 53 Zone Private true | false"
-  type        = bool
 }
 
 variable "user" {
