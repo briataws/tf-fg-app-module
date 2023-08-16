@@ -10,6 +10,7 @@ resource "aws_security_group" "ecs_service" {
   description = "Allow egress from container"
 
   egress {
+    description = "All Outbound"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -17,6 +18,7 @@ resource "aws_security_group" "ecs_service" {
   }
 
   ingress {
+    description     = "Inbound from ALB"
     from_port       = var.app_port
     to_port         = var.app_port
     protocol        = "tcp"
@@ -24,6 +26,7 @@ resource "aws_security_group" "ecs_service" {
   }
 
   ingress {
+    description = "inbound from all"
     from_port = 0
     to_port   = 0
     protocol  = "-1"

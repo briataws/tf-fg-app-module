@@ -37,6 +37,7 @@ resource "aws_security_group" "inbound_sg" {
   vpc_id      = data.aws_vpc.selected.id
 
   ingress {
+    description = "Inbound from anywhere"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -44,6 +45,7 @@ resource "aws_security_group" "inbound_sg" {
   }
 
   ingress {
+    description = "inbound icmp from anywhere"
     from_port   = 8
     to_port     = 0
     protocol    = "icmp"
@@ -51,6 +53,7 @@ resource "aws_security_group" "inbound_sg" {
   }
 
   egress {
+    description = "outbound to anywhere"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
