@@ -27,10 +27,10 @@ resource "aws_security_group" "ecs_service" {
 
   ingress {
     description = "inbound from all"
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-    self      = true
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self        = true
   }
 
   tags = {
