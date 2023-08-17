@@ -10,7 +10,7 @@ resource "random_id" "target_group_sufix" {
 }
 
 locals {
-  private_filtered_subnet_ids = compact([for k, v in data.aws_subnets.filtered_private : try(v.ids[0], "null")])
+  private_filtered_subnet_ids = compact([for k, v in data.aws_subnets.filtered_private : try(v.ids[0], null)])
 }
 
 resource "aws_alb_target_group" "selected" {
