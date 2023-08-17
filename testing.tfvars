@@ -1,9 +1,7 @@
-vpc_name             = "mgmt"
+vpc_name             = "kite-rd-aiml-dev-vpc"
 region               = "us-west-2"
-environment          = "mgmt"
+environment          = "dev"
 image_url            = "bcarpio/python-hello-world"
-instance_network_tag = "Private"
-alb_network_tag      = "Public"
 alb_internal         = false
 app_name             = "hello-world"
 min                  = "1"
