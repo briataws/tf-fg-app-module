@@ -75,6 +75,7 @@ resource "aws_alb" "selected" {
   drop_invalid_header_fields = var.drop_invalid_header_fields
   subnets                    = local.private_filtered_subnet_ids
   security_groups            = [aws_security_group.inbound_sg.id]
+  idle_timeout               = var.idle_timeout
 
   tags = {
     Name        = "${var.environment}-${var.app_name}-alb"

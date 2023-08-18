@@ -65,6 +65,12 @@ variable "timeout" {
   type        = string
 }
 
+variable "idle_timeout" {
+  default     = "60"
+  description = "ALB Idle Timeout"
+  type        = string
+}
+
 variable "interval" {
   default     = "30"
   description = "ALB Target Group Interval"
@@ -110,5 +116,11 @@ variable "aws_service_discovery_namespace" {
 variable "drop_invalid_header_fields" {
   default     = true
   description = "drop invalid header fields"
+  type        = string
+}
+
+variable "ecs_task_execution_role" {
+  default     = "ecs_task_execution_role"
+  description = "ECS Task Exectution Role"
   type        = string
 }
