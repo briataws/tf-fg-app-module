@@ -9,10 +9,6 @@ resource "random_id" "target_group_sufix" {
   byte_length = 2
 }
 
-locals {
-  private_filtered_subnet_ids = compact([for k, v in data.aws_subnets.filtered_private : try(v.ids[0], null)])
-}
-
 resource "aws_alb_target_group" "selected" {
   name        = "${var.environment}-${var.app_name}-alb-${random_id.target_group_sufix.hex}"
   port        = var.app_port
@@ -73,7 +69,7 @@ resource "aws_alb" "selected" {
   name                       = "${var.environment}-${var.app_name}-alb"
   internal                   = var.alb_internal
   drop_invalid_header_fields = var.drop_invalid_header_fields
-  subnets                    = local.private_filtered_subnet_ids
+  subnets                    = [for subnet in data.aws_subnet.private : subnet.id]
   security_groups            = [aws_security_group.inbound_sg.id]
   idle_timeout               = var.idle_timeout
 

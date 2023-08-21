@@ -22,7 +22,7 @@ data "aws_subnets" "private" {
   }
 
   tags = {
-    environment = var.environment
+    Name = "*-vpc-private-*"
   }
 }
 
